@@ -22,14 +22,14 @@ class Respuesta(models.Model):
         return self.texto
 
 
-class Usuario(models.Model):
+class QuizUsuario(models.Model):
     # Cascade para que cuando se elimine un usuario, se eliminen las preguntas respondidas y otras asociaciones del mismo
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     puntaje_total = models.IntegerField(verbose_name='Puntaje Total', default=0)
 
 
 class PreguntasRespondidas(models.Model):
-    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE)
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     respuesta = models.ForeignKey(Respuesta, on_delete=models.CASCADE, related_name='intentos')
     correcta = models.BooleanField(verbose_name='¿Es la respuesta correcta?', default=False, null=False)

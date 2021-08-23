@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Pregunta, Respuesta, PreguntasRespondidas
+from .models import Pregunta, Respuesta, PreguntasRespondidas, QuizUsuario
 
 class RespuestaInline(admin.TabularInline):
     can_delete = False
@@ -23,3 +23,4 @@ class PreguntasRespondidasAdmin(admin.ModelAdmin):
 admin.site.register(PreguntasRespondidas)
 admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(Respuesta)
+admin.site.register(QuizUsuario)
