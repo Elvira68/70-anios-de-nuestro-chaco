@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ObjectDoesNotExist
+from django.http.response import Http404
 from django.shortcuts import redirect, render
 from .forms import RegistroFormulario, LoginFormulario
 from .models import QuizUsuario, Pregunta, PreguntasRespondidas
@@ -65,10 +67,21 @@ def jugar(request):
         pregunta_pk = request.POST.get('pregunta_pk')
         pregunta_respondida = QuizUsuario.intentos.select_related('pregunta').get(pregunta__pk=pregunta_pk)
         respuesta_pk = request.POST.get('respuesta_pk')
+
+        try:
+            opcion_seleccionada = pregunta_respondida.pregunta.opciones.get(pk=respuesta_pk)
+        except ObjectDoesNotExist:
+            raise Http404
+        
+        QuizUser.validar_intento(pregunta_respondida, opcion_seleccionada)
+        return redirect(pregunta_respondida)
+
     # Se renderizan las preguntas que no fueron respondidas
     else:
-        respondidas = PreguntasRespondidas.objects.filter(quizUser=QuizUser).values_list('pregunta__pk', flat=True)
-        pregunta = Pregunta.objects.exclude(pk__in=respondidas)
+        pregunta = QuizUsuario.obtener_nuevas_preguntas()
+        if pregunta is not None:
+            QuizUsuario.crear_intentos(pregunta)
+
         context = {
             'pregunta': pregunta
         }
