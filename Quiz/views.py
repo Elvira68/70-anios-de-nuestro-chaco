@@ -1,7 +1,8 @@
+from typing import ContextManager
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import RegistroFormulario, LoginFormulario
 from .models import QuizUsuario, Pregunta, PreguntasRespondidas
 
@@ -60,29 +61,37 @@ def registro(request):
 
 
 def jugar(request):
-    # get_or_create obtiene el objeto de la base de datos o lo crea 
-    QuizUser, created = QuizUsuario.objects.get_or_create(usuario=request.user)
-    # Validar si la respuesta es verdadera o falsa y guardarla
-    if request.method == 'POST':
-        pregunta_pk = request.POST.get('pregunta_pk')
-        pregunta_respondida = QuizUsuario.intentos.select_related('pregunta').get(pregunta__pk=pregunta_pk)
-        respuesta_pk = request.POST.get('respuesta_pk')
+	QuizUser, created = QuizUsuario.objects.get_or_create(usuario=request.user)
 
-        try:
-            opcion_seleccionada = pregunta_respondida.pregunta.opciones.get(pk=respuesta_pk)
-        except ObjectDoesNotExist:
-            raise Http404
-        
-        QuizUser.validar_intento(pregunta_respondida, opcion_seleccionada)
-        return redirect(pregunta_respondida)
+	if request.method == 'POST':
+		pregunta_pk = request.POST.get('pregunta_pk')
+		pregunta_respondida = QuizUser.intentos.select_related('pregunta').get(pregunta__pk=pregunta_pk)
+		respuesta_pk = request.POST.get('respuesta_pk')
 
-    # Se renderizan las preguntas que no fueron respondidas
-    else:
-        pregunta = QuizUsuario.obtener_nuevas_preguntas()
-        if pregunta is not None:
-            QuizUsuario.crear_intentos(pregunta)
+		try:
+			opcion_selecionada = pregunta_respondida.pregunta.opciones.get(pk=respuesta_pk)
+		except ObjectDoesNotExist:
+			raise Http404
 
-        context = {
-            'pregunta': pregunta
-        }
-    return render(request, 'play/play.html', context)
+		QuizUser.validar_intento(pregunta_respondida, opcion_selecionada)
+
+		return redirect('resultado', pregunta_respondida.pk)
+
+	else:
+		pregunta = QuizUser.obtener_nuevas_preguntas()
+		if pregunta is not None:
+			QuizUser.crear_intentos(pregunta)
+
+		context = {
+			'pregunta':pregunta
+		}
+
+	return render(request, 'play/play.html', context)
+
+
+def resultado_pregunta(request, pregunta_respondida_pk):
+    respondida = get_object_or_404(PreguntasRespondidas, pk=pregunta_respondida_pk)
+    context = {
+        'respondida': respondida
+    }
+    return render(request, 'play/resultados.html', context)

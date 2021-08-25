@@ -38,7 +38,7 @@ class QuizUsuario(models.Model):
         preguntas_restantes = Pregunta.objects.exclude(pk__in=respondidas)
         if not preguntas_restantes.exists():
             return None
-        return random.choice()
+        return random.choice(preguntas_restantes)
     
     # Respuesta Seleccionada es de la clase Respuesta de este mismo archivo (models)
     def validar_intento(self, pregunta_respondida, respuesta_seleccionada):
@@ -48,14 +48,15 @@ class QuizUsuario(models.Model):
         pregunta_respondida.respuesta_seleccionada = respuesta_seleccionada
         if respuesta_seleccionada.correcta is True:
             pregunta_respondida.correcta = True
-            pregunta_respondida.puntaje_obtenido = respuesta_seleccionada.pregunta.puntaje
+            pregunta_respondida.puntaje_obtenido = respuesta_seleccionada.pregunta.max_puntaje
+            pregunta_respondida.respuesta = respuesta_seleccionada
         
         pregunta_respondida.save()
 
 
 class PreguntasRespondidas(models.Model):
-    quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE)
+    quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE, related_name='intentos')
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
-    respuesta = models.ForeignKey(Respuesta, on_delete=models.CASCADE, related_name='intentos')
+    respuesta = models.ForeignKey(Respuesta, on_delete=models.CASCADE, null=True)
     correcta = models.BooleanField(verbose_name='¿Es la respuesta correcta?', default=False, null=False)
     puntaje = models.IntegerField(verbose_name='Puntaje obtenido', default=0)
