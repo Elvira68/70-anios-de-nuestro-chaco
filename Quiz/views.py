@@ -42,7 +42,7 @@ def userLogin(request):
 
 def userLogout(request):
     logout(request)
-    return redirect('/')
+    return redirect('home')
 
 
 def registro(request):
