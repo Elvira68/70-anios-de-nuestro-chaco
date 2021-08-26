@@ -27,7 +27,7 @@ class Respuesta(models.Model):
 class QuizUsuario(models.Model):
     # Cascade para que cuando se elimine un usuario, se eliminen las preguntas respondidas y otras asociaciones del mismo
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    puntaje_total = models.IntegerField(verbose_name='Puntaje Total', default=0)
+    puntaje_total = models.IntegerField(verbose_name='Puntaje Total', default=0, null=True)
 
     def crear_intentos(self, pregunta):
         intento = PreguntasRespondidas(pregunta=pregunta, quizUser=self)

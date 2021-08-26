@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'Quiz',
+    'django_social_share',
+    'django_bootstrap_icons'
 ]
 
 MIDDLEWARE = [
