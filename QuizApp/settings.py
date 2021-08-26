@@ -42,8 +42,11 @@ INSTALLED_APPS = [
 
     'Quiz',
     'django_social_share',
-    'django_bootstrap_icons'
+    'django_bootstrap_icons',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

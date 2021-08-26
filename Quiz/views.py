@@ -7,6 +7,7 @@ from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import RegistroFormulario, LoginFormulario
 from .models import QuizUsuario, Pregunta, PreguntasRespondidas
+from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
@@ -63,6 +64,7 @@ def registro(request):
     return render(request, 'usuario/registro.html', context)
 
 
+@login_required(login_url='/login/')
 def jugar(request):
     QuizUser, created = QuizUsuario.objects.get_or_create(usuario=request.user)
     opciones_correctas = 1
@@ -121,17 +123,3 @@ def tablero(request):
 
     return render(request, 'play/tablero.html', context)
 
-# def fin_juego(request):
-#     QuizUser, created = QuizUsuario.objects.get_or_create(usuario=request.user)
-#     user = QuizUsuario.objects.get(id=QuizUsuario.id)
-#     puntaje_total = QuizUsuario.puntaje_total
-#     # print >>sys.stderr, 'Goodbye, cruel world!'
-
-#     # aggregate = QuizUsuario.objects.filter(puntaje_total=self.puntaje_total).aggregate(ranking=Count('score'))
-# 	#contador = total_usaurios_quiz.count()
-
-#     context = {
-#         'currentUser': 'algo',
-#         'puntaje_total': puntaje_total
-# 	}
-#     return render(request, 'play/play.html', context)
