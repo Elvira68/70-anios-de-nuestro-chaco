@@ -1,5 +1,73 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block cabecera %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 
 {% block contenido %}
-    Bienvenido {{ user }}
+    <header class="hero">
+        <app-nav-bar></app-nav-bar>
+        <div class="textos-hero">
+            <h1>Quiz App</h1>
+            <p>Celebrando los 70 años de la provincia del Chaco</p>
+            <a href="#contacto" class="ng-btn-indx">Contacto</a>
+        </div>
+        <div class="svg-hero" style="height: 150px; overflow: hidden; margin-bottom: -3px;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #ffffff;"></path>
+            </svg>
+        </div>
+    </header>
+    <section class="wave-contenedor website" id="nosotros">
+        <img src="{% static 'img/nature.svg' %}" alt="Ilustracion 1">
+        <div class="contenedor-textos-main">
+            <h2 class="titulo left">Un lugar con historia</h2>
+            <p class="parrafo">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa architecto, delectus consectetur et eius adipisci animi omnis eveniet. Maxime deleniti non voluptate aliquam impedit quae sint commodi quas odit laudantium.
+            </p>
+            <a href="#" class="cta ng-btn-indx">Leer más</a>
+        </div>
+    </section>
+    <section class="info">
+        <div class="contenedor">
+            <h2 class="titulo left">Juntos podemos ayudar</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam ut minima sed eum. Amet incidunt ullam sed veritatis illum est debitis ducimus velit? Corporis itaque dicta officia eos nesciunt in.
+            </p>
+        </div>
+    </section>
+    <section class="info-last">
+        <div class="contenedor last-section">
+            <div class="contenedor-textos-main">
+                <h2 class="titulo left">Aprende jugando</h2>
+                <p class="parrafo">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum cumque et libero ipsum voluptate optio repellat culpa deleniti quisquam ullam qui provident ipsam illum, dolores numquam dolorum vel enim natus?
+                </p>
+                <a href="{% url 'jugar' %}" class="cta ng-btn-indx px-4">Jugar</a>
+            </div>
+            <img src="{% static 'img/check.svg' %}" alt="">
+        </div>
+        <div class="svg-wave" style="height: 150px; overflow: hidden; margin-bottom: -3px;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #007bff;"></path>
+            </svg>
+        </div>
+    </section>
+    <div class="contacto" id="contacto">
+        <div class="contenedor">
+            <h2 class="titulo">Contáctanos</h2>
+            <p class="contact-paragraph">Los campos marcados con un "<span class="highlighted-text">*</span>" son obligatorios</p>
+            <form id="contact-form" method="POST" class="form" onsubmit="event.preventDefault();">
+                <input class="input" type="text" name="" id="nombre" placeholder="Nombre *">
+                <input class="input" type="email" name="" id="emailContacto" placeholder="E-mail *">
+                <textarea class="input" name="" id="mensaje" cols="30" rows="10" maxlength="150" placeholder="Mensaje *"></textarea>
+                <div class="contact-buttons" id="contactFormFooter">
+                    <input class="input" type="submit" value="Enviar">
+                    <input class="input" type="reset" value="Restablecer" id="restablecer" name="restablecer" >
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

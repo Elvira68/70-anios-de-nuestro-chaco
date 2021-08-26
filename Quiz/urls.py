@@ -12,5 +12,3 @@ urlpatterns = [
     path('resultado/<int:pregunta_respondida_pk>', resultado_pregunta, name='resultado'),
     path('tablero/', tablero, name='tablero'),
 ]
-
-urlpatterns += staticfiles_urlpatterns()

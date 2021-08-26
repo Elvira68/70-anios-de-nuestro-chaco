@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-AR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/quiz.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+    {% block cabecera %}
+	{% endblock %}
 </head>
 <body>
     <!--Navbar-->
@@ -50,9 +52,6 @@
       </nav>
     {% block contenido %}
 	{% endblock %}
-
-
-      
 
 </body>
 <!-- Site footer -->
