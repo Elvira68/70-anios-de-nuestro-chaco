@@ -41,16 +41,19 @@ class QuizUsuario(models.Model):
         return random.choice(preguntas_restantes)
     
     # Respuesta Seleccionada es de la clase Respuesta de este mismo archivo (models)
-    def validar_intento(self, pregunta_respondida, respuesta_seleccionada):
-        if pregunta_respondida.pregunta_id != respuesta_seleccionada.pregunta_id:
-            return
+    def validar_intento(self, pregunta_respondida, respuestas_seleccionadas, opciones_correctas):
+        for res in respuestas_seleccionadas:
+            if pregunta_respondida.pregunta_id != res.pregunta_id:
+                return
         
-        pregunta_respondida.respuesta_seleccionada = respuesta_seleccionada
-        if respuesta_seleccionada.correcta is True:
-            pregunta_respondida.correcta = True
-            pregunta_respondida.puntaje = respuesta_seleccionada.pregunta.max_puntaje
+        pregunta_respondida.respuesta_seleccionada = respuestas_seleccionadas
+        valor = respuestas_seleccionadas[0].pregunta.max_puntaje / opciones_correctas
+        for res in respuestas_seleccionadas:
+            if res.correcta is True:
+                pregunta_respondida.correcta = True
+                pregunta_respondida.puntaje = pregunta_respondida.puntaje + valor
         
-        pregunta_respondida.respuesta = respuesta_seleccionada
+        pregunta_respondida.respuesta.set(respuestas_seleccionadas)
         pregunta_respondida.save()
         self.actualizar_puntaje()
     
@@ -65,7 +68,7 @@ class QuizUsuario(models.Model):
 
 class PreguntasRespondidas(models.Model):
     quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE, related_name='intentos')
-    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
-    respuesta = models.ForeignKey(Respuesta, on_delete=models.CASCADE, null=True)
+    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name='pregunta_intento')
+    respuesta = models.ManyToManyField(Respuesta, null=True)
     correcta = models.BooleanField(verbose_name='¿Es la respuesta correcta?', default=False, null=False)
     puntaje = models.IntegerField(verbose_name='Puntaje obtenido', default=0)

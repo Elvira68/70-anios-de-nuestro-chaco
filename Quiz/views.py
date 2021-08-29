@@ -73,15 +73,19 @@ def jugar(request):
         pregunta_pk = request.POST.get('pregunta_pk')
         pregunta_respondida = QuizUser.intentos.select_related(
             'pregunta').get(pregunta__pk=pregunta_pk)
-        respuesta_pk = request.POST.get('respuesta_pk')
+        respuestas_pk = request.POST.getlist('respuesta_pk')
+        preg = Pregunta.objects.get(pk=pregunta_pk)
 
         try:
-            opcion_selecionada = pregunta_respondida.pregunta.opciones.get(
-                pk=respuesta_pk)
+            list = []
+            for i in respuestas_pk:
+                list.append(pregunta_respondida.pregunta.opciones.get(
+                pk=i))
         except ObjectDoesNotExist:
             raise Http404
 
-        QuizUser.validar_intento(pregunta_respondida, opcion_selecionada)
+        opciones_correctas = preg.opciones.aggregate(correctas=Count(Case(When(correcta=1, then=1))))
+        QuizUser.validar_intento(pregunta_respondida, list, opciones_correctas['correctas'])
 
         return redirect('resultado', pregunta_respondida.pk)
 
@@ -89,13 +93,13 @@ def jugar(request):
         pregunta = QuizUser.obtener_nuevas_preguntas()
         if pregunta is not None:
             QuizUser.crear_intentos(pregunta)
-            opciones_correctas = pregunta.opciones.aggregate(correctas=Count(Case(When(correcta=1, then=1))))
         
         posicion = QuizUsuario.objects.filter(puntaje_total=QuizUser.puntaje_total).aggregate(ranking=Count('puntaje_total'))
 
         context = {
             'opciones_correctas': opciones_correctas,
             'posicion': posicion['ranking'],
+            'post': request.POST,
             'puntaje_total': QuizUser.puntaje_total,
             'pregunta': pregunta
         }
