@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "justMyCode": false,
-            "pythonPath": "D:\\Informatorio\\QuizApp\\Scripts\\python.exe",
+            "python": "D:\\Informatorio\\QuizApp\\Scripts\\python.exe",
             "program": "${workspaceFolder}\\manage.py",
             "args": [
                 "runserver"
