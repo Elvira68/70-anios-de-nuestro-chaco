@@ -28,6 +28,7 @@ class QuizUsuario(models.Model):
     # Cascade para que cuando se elimine un usuario, se eliminen las preguntas respondidas y otras asociaciones del mismo
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usuario')
     puntaje_total = models.DecimalField(verbose_name='Puntaje Total', default=0, decimal_places=2, max_digits=10, null=True)
+    fecha_de_creacion = models.DateTimeField(auto_now_add=True)
 
     def crear_intentos(self, pregunta):
         intento = PreguntasRespondidas(pregunta=pregunta, quizUser=self)
@@ -80,6 +81,6 @@ class QuizUsuario(models.Model):
 class PreguntasRespondidas(models.Model):
     quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE, related_name='intentos')
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name='pregunta_intento')
-    respuesta = models.ManyToManyField(Respuesta, null=True)
+    respuesta = models.ManyToManyField(Respuesta)
     correcta = models.BooleanField(verbose_name='¿Es la respuesta correcta?', default=False, null=False)
     puntaje = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
