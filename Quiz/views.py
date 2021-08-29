@@ -44,6 +44,10 @@ def userLogout(request):
     logout(request)
     return redirect('home')
 
+def borrarJuego(request):
+    QuizUsuario.objects.get(usuario=request.user).delete()
+    return redirect('jugar')
+
 
 def registro(request):
     titulo = 'Crear una cuenta'

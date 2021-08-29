@@ -26,7 +26,7 @@ class Respuesta(models.Model):
 
 class QuizUsuario(models.Model):
     # Cascade para que cuando se elimine un usuario, se eliminen las preguntas respondidas y otras asociaciones del mismo
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usuario')
     puntaje_total = models.DecimalField(verbose_name='Puntaje Total', default=0, decimal_places=2, max_digits=10, null=True)
 
     def crear_intentos(self, pregunta):
@@ -43,7 +43,6 @@ class QuizUsuario(models.Model):
     # Respuesta Seleccionada es de la clase Respuesta de este mismo archivo (models)
     def validar_intento(self, pregunta_respondida, respuestas_seleccionadas, opciones_correctas):
         for res in respuestas_seleccionadas:
-            # Si una de las respuestas elegidas no es correcta, se le descuenta un punto, siempre y cuando el puntaje sea mayor a 0
             if pregunta_respondida.pregunta_id != res.pregunta_id:
                 return
         
@@ -54,6 +53,7 @@ class QuizUsuario(models.Model):
                 pregunta_respondida.correcta = True
                 pregunta_respondida.puntaje = pregunta_respondida.puntaje + valor
             else:
+                # Si una de las respuestas elegidas no es correcta, se le descuenta un punto
                 pregunta_respondida.puntaje = pregunta_respondida.puntaje - 1
         
         pregunta_respondida.respuesta.set(respuestas_seleccionadas)
@@ -73,10 +73,6 @@ class QuizUsuario(models.Model):
             puntaje_actualizado = 0
         
         # Actualizamos el puntaje
-        # if puntaje_actualizado == None:
-        #     self.puntaje_total = 0
-        # else:
-        #     self.puntaje_total = puntaje_actualizado
         self.puntaje_total = puntaje_actualizado
         self.save()
 
