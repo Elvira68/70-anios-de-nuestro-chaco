@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load social_share %}
+{% load static %}
+
+{% block tituloo %}
+    QuizApp | Quiz
+{% endblock %}
+
+{% block cabecera %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/play.css' %}">
+    <script defer type="text/javascript" src="{% static 'js/quiz.js' %}"></script>
+{% endblock %}
+
+{% block contenido %}
+    <div class="all">
+        {% if pregunta is None %}
+            <div class="quiz-container" id="quiz">
+                <div class="quiz-header">
+                    <h2 class="h2Play">Juego terminado</h2>
+                    <div class="ulPlay">
+                        <div class="liPlay">
+                        <p class="text-center">Sumaste {{ puntaje_total }} puntos y terminaste en el {{ posicion }}° lugar</p>
+                        <p class="text-center">¡Felicidades!</p>
+                        <p class="text-center">Consulta el <a href="{% url 'tablero' %}">tablero de posiciones</a></p>
+                        </div>
+                    </div>
+                    <a href="{% url 'borrarJuego' %}">
+                        <button class="buttonPlay">Volver a jugar</button>
+                    </a>
+                    <p class="nota" ><span style="font-weight: bold;">Nota:</span> Para una mayor transparencia en el tablero de posiciones, si decide volver a jugar, su juego anterior será eliminado y reemplazado por el nuevo con su respectivo puntaje</p>
+                    <div class="ulPlay">
+                        <div class="liPlay">
+                            <p class="text-left" >Compartir en redes sociales</p>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <ul class="social-icons">
+                                    <div class="row">
+                                    <li>
+                                        {% post_to_facebook object_or_url " " "fab fa-facebook-f" %}
+                                    </li>
+                                    <li>
+                                        {% post_to_twitter "algun texto" object_or_url " " "fab fa-twitter" %}
+                                    </li>
+                                    <li>
+                                        {% post_to_whatsapp object_or_url " " "fab fa-whatsapp" %}
+                                    </li>
+                                </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {%else%}
+            <div class="quiz-container" id="quiz">
+                <form method="POST" id="pregunta-form">
+                    {% csrf_token %}
+                    <div class="quiz-header" style="margin-bottom: -32px;">
+                        <div class="row">
+                            <div class="col text-right" id="timer-box"></div>
+                        </div>
+                        <h2 class="h2Play">{{ pregunta.texto }}</h2>
+                        <input type="hidden" name="pregunta_pk" value="{{ pregunta.pk }}" >
+                        <ul class="ulPlay">
+                            {% for opciones in pregunta.opciones.all %}
+                                <li class="liPlay">
+                                    <input type="checkbox" name="respuesta_pk" id="choice-{{ forloop.counter }}" class="form-check-input mt-2" value="{{opciones.pk}}" />
+                                    <label class="form-check-label" for="choice-{{ forloop.counter }}" id="a_text">{{ opciones.texto }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <button type="submit" class="buttonPlay">Enviar</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

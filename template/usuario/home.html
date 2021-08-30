@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tituloo %}
+    QuizApp | Home
+{% endblock %}
+
+{% block cabecera %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
+{% block contenido %}
+    <header class="hero">
+        <app-nav-bar></app-nav-bar>
+        <div class="textos-hero">
+            <h1>Quiz App</h1>
+            <p>Celebrando los 70 años de la provincia del Chaco</p>
+            <a href="#contacto" class="ng-btn-indx">Contacto</a>
+        </div>
+        <div class="svg-hero" style="height: 150px; overflow: hidden; margin-bottom: -3px;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #ffffff;"></path>
+            </svg>
+        </div>
+    </header>
+    <section class="wave-contenedor website" id="nosotros">
+        <img src="{% static 'img/nature.svg' %}" alt="Ilustracion 1">
+        <div class="contenedor-textos-main">
+            <h2 class="titulo left">Un lugar con historia</h2>
+            <p style="font-weight: bold; font-style: italic;">Poema de Luis Landriscina "Chaco"</p>
+            <p class="parrafo">
+                Chaco, provincia pujante
+                en la vida de la Patria,
+                tierra que antaño fuera
+                rugir de tigres y hachas,
+                de gentes que por poblar
+                morían a punta de lanza,
+                porque el malón no perdona :
+                su defensa es la matanza.
+                Tierra de selvas tupidas
+                y también de extensas pampas,
+                de chacras entre los montes,
+                de mucho tiempo sin agua,
+                de cañadas y de esteros,
+                de bichos de toda laya,
+                de las mangas de langostas
+                matadoras de esperanzas.
+                Tierra de surcos rebeldes
+                que a veces no devolvían
+                lo que el hombre les prestaba,
+                de obrajes con jornaleros
+                que vuelcan su alma en el hacha.
+                Sus vidas son de los montes,
+                de las miserias y farras.
+                Pero al telón de ese Chaco
+                el tiempo lo va cerrando,
+                y donde el tigre rugía
+                hoy hay tractores arando.
+                Se acabaron los malones,
+                las tribus se han vuelto mansas,
+                y están chuceando la tierra
+                con rejas en vez de lanzas.
+                Ramillete de indios fuertes
+                de melancólicas razas,
+                son también hijos del monte,
+                simbólicos como el hacha.
+                Y no es de menos valor
+                el gringo de tierra extraña
+                que se metió en nuestros montes
+                y luchó en pos de sus ansias.
+                Tuvo que afrontar mil contras,
+                ahuyentar penas que matan,
+                y en la lucha por la vida
+                aprendió a querer mi Patria.
+                Ese puñado de cosas,
+                más voluntad y esperanza,
+                fueron levantando el Chaco
+                al nivel de sus hermanas.
+                Hoy sigue golpeando el hacha
+                y la reja no descansa.
+                Por eso los pueblos brotan
+                como por arte de magia,
+                los caminos se hacen anchos,
+                se va agrandando la Patria,
+                y el algodón de las chacras
+                va curando las heridas
+                de los quebrachos que sangran.
+                Chaco, provincia querida
+                que al progreso se encamina,
+                hoy, hoy abraza a sus hermanas
+                de esta mi tierra argentina.
+            </p>
+            <a href="https://chaco.gov.ar/" target="_blank" class="cta ng-btn-indx">Leer más</a>
+        </div>
+    </section>
+    <section class="info">
+        <div class="contenedor">
+            <h2 class="titulo left">Juntos podemos ayudar</h2>
+            <p>
+                En las sociedades contemporáneas la Historia tiene un papel importante. La Historia es, más que la maestra de la vida como la definiera Heródoto, un conocimiento que suele utilizarse como justificación del presente. Por esa razón es nuestra intención ayudar a través del juego a la comprensión de nuestras raíces culturales y de la herencia común. 
+            </p>
+        </div>
+    </section>
+    <section class="info-last">
+        <div class="contenedor last-section">
+            <div class="contenedor-textos-main">
+                <h2 class="titulo left">Aprende jugando</h2>
+                <p class="parrafo">
+                    Queremos invitarlos a compartir esta aplicación y “Juntos, aprender jugando” acerca de nuestra provincia, su evolución histórica, su proceso económico y su consolidación política. Y así, reflexionar y contribuir a la comprensión y la comunicación a través del uso de las nuevas tecnologías de la información y la comunicación promoviendo la adaptación a un entorno cada vez más digitalizado con vistas a crear un ambiente favorable para el desarrollo personal.
+                </p>
+                <a href="{% url 'jugar' %}" class="cta ng-btn-indx px-4">Jugar</a>
+            </div>
+            <img src="{% static 'img/check.svg' %}" alt="">
+        </div>
+        <div class="svg-wave" style="height: 150px; overflow: hidden; margin-bottom: -3px;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #007bff;"></path>
+            </svg>
+        </div>
+    </section>
+    <div class="contacto" id="contacto">
+        <div class="contenedor">
+            <h2 class="titulo">Contáctanos</h2>
+            <p class="contact-paragraph">Los campos marcados con un "<span class="highlighted-text">*</span>" son obligatorios</p>
+            <form id="contact-form" method="POST" class="form" onsubmit="event.preventDefault();">
+                <input class="input" type="text" name="" id="nombre" placeholder="Nombre *">
+                <input class="input" type="email" name="" id="emailContacto" placeholder="E-mail *">
+                <textarea class="input" name="" id="mensaje" cols="30" rows="10" maxlength="150" placeholder="Mensaje *"></textarea>
+                <div class="contact-buttons" id="contactFormFooter">
+                    <input class="input" type="submit" value="Enviar">
+                    <input class="input" type="reset" value="Restablecer" id="restablecer" name="restablecer" >
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
