@@ -83,6 +83,6 @@ class QuizUsuario(models.Model):
 class PreguntasRespondidas(models.Model):
     quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE, related_name='intentos')
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name='pregunta_intento')
-    respuesta = models.ManyToManyField(Respuesta)
+    respuesta = models.ManyToManyField(Respuesta, related_name='respuestas')
     correcta = models.BooleanField(verbose_name='¿Es la respuesta correcta?', default=False, null=False)
     puntaje = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)

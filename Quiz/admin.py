@@ -30,7 +30,7 @@ class Estadísticas(admin.ModelAdmin):
     ordering = ("-fecha_de_creacion",)                  # Ordenarlos por fecha de creación
 
     def changelist_view(self, request, extra_context=None):
-        # Aggregate new subscribers per day
+        # Obtener la cantidad de juegos según fecha de creación
         chart_data = (
             QuizUsuario.objects.annotate(date=TruncDay("fecha_de_creacion"))
             .values("date")
@@ -38,16 +38,14 @@ class Estadísticas(admin.ModelAdmin):
             .order_by("-date")
         )
 
-        # Serialize and attach the chart data to the template context
+        # Serializarilizar y adjuntar datos del gráfico para enviarselos al template
         as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
         extra_context = extra_context or {"chart_data": as_json}
 
-        # Call the superclass changelist_view to render the page
+        # Llamamos a la superclase changelist_view para renderizar la página
         return super().changelist_view(request, extra_context=extra_context)
 
 
 admin.site.register(PreguntasRespondidas)
 admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(Respuesta)
-# admin.site.register(QuizUsuario)
-# admin.site.register(Estadísticas)

@@ -114,7 +114,7 @@ def resultado_pregunta(request, pregunta_respondida_pk):
     respondida = get_object_or_404(
         PreguntasRespondidas, pk=pregunta_respondida_pk)
     context = {
-        'respondida': respondida
+        'respondida': respondida,
     }
     return render(request, 'play/resultados.html', context)
 

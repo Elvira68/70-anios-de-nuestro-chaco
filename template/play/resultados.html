@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block tituloo %}
-    QuizApp | Quiz
-{% endblock %}
+
 
 {% block contenido %}
     <div class="container" style="min-height: 84vh;">
@@ -10,23 +8,42 @@
             <h3 class="text info">{{ respondida.pregunta.texto | safe }}</h3>
             <p>
                 <strong>Tu respuesta:</strong>
-                {{ respondida.respuesta.texto|safe }}
+                {% for respuesta in respondida.respuesta.all %}
+                    <p>
+                        {{ respuesta }}
+                    </p>
+                {% endfor %}
             </p>
-        
-            {% if respondida.respuesta.correcta %}
-                <h4 class="text-success">Tu respuesta es correcta!!</h4>
+            <p>pregunta puntje: {{ respondida.pregunta.max_puntaje }}</p>
+            <p>puntaje: {{ respondida.puntaje }}</p>
+            <p>puntaje quizuser: {{ respondida.quizUser.puntaje_total }}</p>
+
+            {% if respondida.pregunta.max_puntaje == respondida.puntaje %}
+                
+                <h4 class="text-success">Respuesta correcta</h4>
+            
             {% else %}
-                <h4 class="text-danger">Tu respuesta es incorrecta!!</h4>
+        
+                {% if respondida.puntaje > 0 and respondida.pregunta.max_puntaje > respondida.puntaje %}
+                    
+                    <h4 class="text-success">Respuesta parcialmente correcta</h4>
+                {% else %}
+                    <h4 class="text-danger">Respuesta incorrecta</h4>
+                
+                {% endif %}
+
+                <h4>La respuesta correcta es:</h4>
 
                 {% for respuesta in respondida.pregunta.opciones.all %}
 
                     {% if respuesta.correcta %}
 
-                        <h4>La respuesta correcta es: <span class="text-success">{{respuesta}}</span></h4>
+                        <p class="text-success">{{respuesta}}</p>
                         
                     {% endif %}
 
                 {% endfor %}
+                
 
             {% endif %}
 
