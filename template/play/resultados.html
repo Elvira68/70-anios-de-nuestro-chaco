@@ -1,1 +1,66 @@
-RESULTADOS
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block tituloo %}
+    QuizApp | Quiz
+{% endblock %}
+
+{% block cabecera %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/play.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="all">
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header" style="margin-bottom: -32px;">
+            <h2 class="h2Play">{{ respondida.pregunta.texto | safe }}</h2>
+            <div class="ulPlay">
+                <div class="liPlay">
+                    <div class="text-center">
+                        <strong>Tu respuesta</strong>
+                        {% for respuesta in respondida.respuesta.all %}
+                            <p class="text-center">
+                                {{ respuesta }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% if respondida.pregunta.max_puntaje == respondida.puntaje %}    
+                <h4 class="h2Play text-success">Respuesta correcta</h4>  
+            {% else %}
+                {% if respondida.puntaje > 0 and respondida.pregunta.max_puntaje > respondida.puntaje %}          
+                    <h4 class="text-play h2Play">Respuesta parcialmente correcta</h4>
+                {% else %}
+                    <h4 class="h2Play text-danger">Respuesta incorrecta</h4>
+                
+                {% endif %}
+
+                <div class="ulPlay">
+                    <div class="liPlay">
+                        <div class="text-center">
+                            <strong>a respuesta correcta es</strong>
+                            {% for respuesta in respondida.pregunta.opciones.all %}
+                                {% if respuesta.correcta %}
+                                    <p class="text-success">{{respuesta}}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if respondida.puntaje >= 0 %}
+                <p class="text-center nota">Sumaste {{ respondida.puntaje }} puntos de {{ respondida.pregunta.max_puntaje }} posibles</p>
+            {% else %}
+                <p class="text-center nota">Restaste {{ respondida.puntaje | abs }} punto(s)</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'jugar' %}">
+            <button class="buttonPlay">
+                Continuar con la siguiente pregunta
+            </button>
+        </a>
+    </div>
+</div>
+{% endblock %}

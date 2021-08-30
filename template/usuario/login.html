@@ -1,18 +1,43 @@
-<!DOCTYPE html>
-<html lang="es-AR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">
-            Iniciar Sesión
-        </button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block tituloo %}
+    QuizApp | Login
+{% endblock %}
+
+{% block cabecera %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/play.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <div class="all">
+        <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 class="card-title text-center p-3">QuizApp</h2>
+                    <div class="card-body py-md-4">
+                        <form method="POST">
+                            <div class="form-group">
+                                {% csrf_token %}
+                                {{ form | crispy }}
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="submit" class="btn btn-primary">
+                                            Iniciar Sesión
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    <p class="text-center mb-4">
+                        <a href="{% url 'registro' %}">¿No tienes una cuenta?</a>
+                    </p>
+                </div>
+
+        </div>
+    </div>
+{% endblock %}

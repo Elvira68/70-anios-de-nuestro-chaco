@@ -1,0 +1,13 @@
+.quiz-nav {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+}
+
+.logout-icon {
+    font-weight: bolder;
+    font-size: 30px;
+    margin-left: 8px;
+}

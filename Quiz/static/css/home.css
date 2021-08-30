@@ -1,0 +1,227 @@
+/* Hace que al hacer click en una etiqueta "<a/>", se scrollee en vez de que aparezca seca esa sección. */
+
+html {
+    scroll-behavior: smooth;
+}
+
+.hero {
+    background-image: linear-gradient(120deg, hsla(199, 93%, 78%, 0.7) 0%, hsla(236, 89%, 65%, 0.7) 100%), url("https://images.ctfassets.net/tvct06g28aw7/3oT86rNs5ZyjmsS6ATGt7U/0b4dcd66dd13418f079f0421c1a26d02/Resist_2.jpg");
+    width: 100%;
+    height: 650px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* Esto es lo que da el efecto ese de que aparezca fija la imagen */
+    background-attachment: fixed;
+    position: relative;
+    /* Para que nada salga del hero */
+    overflow: hidden;
+}
+
+.textos-hero {
+    height: 500px;
+    color: white;
+    /* Se ponen uno al lado del otro los textos */
+    display: flex;
+    /* Arregla lo de la línea anterior */
+    flex-direction: column;
+    /* Los centro horizontal y verticalmente */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.textos-hero h1 {
+    font-size: 60px;
+}
+
+.textos-hero p {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.textos-hero a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 15px;
+    background: #007bff;
+    border-radius: 8px;
+    color: white;
+}
+
+.svg-hero {
+    /* Position absolute, para que se posicione inmediatamente del padre (que tiene un position relative) */
+    /* Position absolute lo que hace es, por más que se redimensione la pantalla, el svg no se mueva */
+    /* Por ejemplo, si comentamos estas líneas, y comentamos el height de textos-hero, el svg se va a mover */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+/* ESTILOS GENERALES */
+
+.contenedor,
+.wave-contenedor {
+    width: 90%;
+    max-width: 1000px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0 0 80px 0;
+}
+
+.resis {
+    margin-top: 5%;
+}
+
+.contenedor {
+    padding: 80px 0;
+}
+
+.titulo {
+    font-weight: 300;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.titulo.left {
+    text-align: left;
+}
+
+
+/* Section */
+
+.website {
+    display: flex;
+    /* Separación horizontal entre la imágen y el texto */
+    justify-content: space-between;
+}
+
+.website img {
+    width: 48%;
+}
+
+.website .contenedor-textos-main {
+    width: 40%;
+}
+
+.parrafo {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.cta {
+    display: inline-block;
+    text-decoration: none;
+    background-image: linear-gradient(45deg, #007bff 0%, #59a9ff 99%, #b0d3f8 100%);
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+.ng-btn-indx {
+    text-decoration: none !important;
+}
+.ng-btn-indx:hover {
+    color: white !important;
+}
+
+
+/* Info */
+
+.info {
+    background: #007bff;
+    color: white;
+}
+
+/* Contacto */
+
+.contacto {
+    background: #007bff;
+    color: white;
+}
+
+.form {
+    display: flex;
+    /* Si los elementos consumen todo el ancho, se van abajo */
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input {
+    background: transparent;
+    border: 0;
+    color: white;
+    outline: none;
+    border: 1px solid white;
+    padding: 20px 10px;
+}
+
+.input::placeholder {
+    color: white;
+    font-family: 'raleway', 'sans-serif';
+}
+
+input[type="text"],
+input[type="email"] {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 30px;
+}
+
+.form textarea {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    width: 120px;
+    text-align: center;
+    padding: 14px 0;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    cursor: pointer;
+    color: #007bff;
+    background: white;
+}
+
+input[type="reset"] {
+    margin-left: 1%;
+}
+
+.contact-buttons {
+    width: 100%;
+}
+
+.contact-paragraph {
+    text-align: center;
+    font-size: 80%;
+    padding-bottom: 2%;
+}
+
+.highlighted-text {
+    font-weight: bold;
+    font-size: 110%;
+}
+
+/* info2 */
+
+.last-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 40px;
+}
+
+.last-section img {
+    width: 48%;
+}
+
+.last-section .contenedor-textos-main {
+    width: 40%;
+}
