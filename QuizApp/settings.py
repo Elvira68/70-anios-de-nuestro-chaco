@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 
     'Quiz',
     'django_social_share',
-    'django_bootstrap_icons',
     'crispy_forms',
     'mathfilters',
     'fontawesomefree',
