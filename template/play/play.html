@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% load social_share %}
+{% load static %}
+
+{% block tituloo %}
+    QuizApp | Quiz
+{% endblock %}
+
+{% block cabecera %}
+    <script defer type="text/javascript" src="{% static 'js/quiz.js' %}"></script>
+{% endblock %}
 
 {% block contenido %}
-    {% if pregunta is None %}
-        <div class="container" style="min-height: 85vh;">
+    <div class="container" style="min-height: 85vh;">
+        {% if pregunta is None %}
             <div class="jumbotron my-4">
                 <h1>Ya has respondido a todas nuestras preguntas. Mira el tablero de posiciones</h1>
                 <a href="{% url 'tablero' %}">Ver aquí</a>
-                <!-- <p>{{ user }}</p> -->
                 <p>Posición: {{ posicion }}</p>
                 <p>Puntaje total: {{ puntaje_total }} puntos</p>
                 <a href="{% url 'borrarJuego' %}">
@@ -26,17 +34,16 @@
                     {% post_to_whatsapp object_or_url " " "fa fa-whatsapp" %}
                 </div>
             </div>
-        </div>
-    {%else%}
-        <div class="container" style="min-height: 85vh;">
+        {%else%}
+            <div class="row">
+                <div class="col text-right" id="timer-box"></div>
+            </div>
             <div class="jumbotron my-4">
                 <h3>{{ pregunta.texto }}</h3>
-                <p>Opciones Correctas: {{ opciones_correctas }}</p>
-                <form method="POST" class="form">
+                <form method="POST" class="form" id="pregunta-form">
                     {% csrf_token %}
                     <input type="hidden" name="pregunta_pk" value="{{ pregunta.pk }}" >
                     {% for opciones in pregunta.opciones.all %}
-                        <!-- <p>{{ opciones.correcta }}</p> -->
                         <div class="form-check mx-4">
                             <input class="form-check-input" type="checkbox" name="respuesta_pk" value="{{opciones.pk}}" id="choice-{{ forloop.counter }}" >
                             <label for="choice-{{ forloop.counter }}" class="form-check-label" >
@@ -49,6 +56,6 @@
                     </button>
                 </form>
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}

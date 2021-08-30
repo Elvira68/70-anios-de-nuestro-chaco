@@ -101,7 +101,6 @@ def jugar(request):
         posicion = QuizUsuario.objects.filter(puntaje_total=QuizUser.puntaje_total).aggregate(ranking=Count('puntaje_total'))
 
         context = {
-            'opciones_correctas': opciones_correctas,
             'posicion': posicion['ranking'],
             'post': request.POST,
             'puntaje_total': QuizUser.puntaje_total,

@@ -43,19 +43,21 @@ class QuizUsuario(models.Model):
     
     # Respuesta Seleccionada es de la clase Respuesta de este mismo archivo (models)
     def validar_intento(self, pregunta_respondida, respuestas_seleccionadas, opciones_correctas):
-        for res in respuestas_seleccionadas:
-            if pregunta_respondida.pregunta_id != res.pregunta_id:
-                return
+        if (len(respuestas_seleccionadas) > 0):
+            for res in respuestas_seleccionadas:
+                if pregunta_respondida.pregunta_id != res.pregunta_id:
+                    return
         
         pregunta_respondida.respuesta_seleccionada = respuestas_seleccionadas
-        valor = respuestas_seleccionadas[0].pregunta.max_puntaje / opciones_correctas
-        for res in respuestas_seleccionadas:
-            if res.correcta is True:
-                pregunta_respondida.correcta = True
-                pregunta_respondida.puntaje = pregunta_respondida.puntaje + valor
-            else:
-                # Si una de las respuestas elegidas no es correcta, se le descuenta un punto
-                pregunta_respondida.puntaje = pregunta_respondida.puntaje - 1
+        if len(respuestas_seleccionadas) > 0:
+            valor = respuestas_seleccionadas[0].pregunta.max_puntaje / opciones_correctas
+            for res in respuestas_seleccionadas:
+                if res.correcta is True:
+                    pregunta_respondida.correcta = True
+                    pregunta_respondida.puntaje = pregunta_respondida.puntaje + valor
+                else:
+                    # Si una de las respuestas elegidas no es correcta, se le descuenta un punto
+                    pregunta_respondida.puntaje = pregunta_respondida.puntaje - 1
         
         pregunta_respondida.respuesta.set(respuestas_seleccionadas)
         pregunta_respondida.save()
