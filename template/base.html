@@ -1,4 +1,6 @@
 {% load static %}
+{% load bootstrap_icons %}
+
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -13,12 +15,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+    <link rel="icon"href="{% static 'img/favicon.ico' %}">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     {% block cabecera %}
 	  {% endblock %}
 </head>
 <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light quiz-nav">
         <a class="navbar-brand" href="{% url '' %}">QuizApp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -44,7 +49,7 @@
                     style="border: solid rgba(97, 97, 97, 0.986) 3px; border-radius: 100px;"
                 >
             </h6>
-            <a href="{% url 'logout' %}" class="btn btn-secondary my-2 my-sm-0">Cerrar Sesión</a>
+            <a href="{% url 'logout' %}" ><i class="fas fa-sign-out-alt logout-icon" ></i></a>
           {% else %}
             <a href="{% url 'login' %}" class="btn btn-primary my-2 my-sm-0">Iniciar Sesión</a>
           {% endif %}
@@ -62,12 +67,11 @@
         <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by Grupo 12.
         </p>
         </div>
-
         <div class="col-md-4 col-sm-6 col-xs-12">
         <ul class="social-icons">
-            <li><a class="facebook" href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="https://www.twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
-            <li><a class="linkedin" href="https://www.linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>   
+            <li><a class="facebook" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a class="twitter" href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a class="linkedin" href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>   
         </ul>
         </div>
     </div>

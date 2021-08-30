@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+import sys
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +35,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# sys.modules['fontawesome_free'] = __import__('fontawesome-free')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +49,8 @@ INSTALLED_APPS = [
     'django_social_share',
     'django_bootstrap_icons',
     'crispy_forms',
+    'mathfilters',
+    'fontawesomefree',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

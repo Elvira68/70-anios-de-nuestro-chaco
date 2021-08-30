@@ -1,6 +1,7 @@
 // const url = window.location.href
 
 const timerBox  = document.getElementById("timer-box");
+const respForm = document.getElementById("pregunta-form");
 
 
 const activateTimer = (minutesParam, secondsParam) => {
@@ -44,5 +45,5 @@ const activateTimer = (minutesParam, secondsParam) => {
 activateTimer(0, 30)
 
 const sendData = () => {
-    document.getElementById("pregunta-form").submit(); 
+    respForm.submit(); 
 }

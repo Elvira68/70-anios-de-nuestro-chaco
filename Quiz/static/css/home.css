@@ -121,6 +121,13 @@ html {
     color: white;
 }
 
+.ng-btn-indx {
+    text-decoration: none !important;
+}
+.ng-btn-indx:hover {
+    color: white !important;
+}
+
 
 /* Info */
 

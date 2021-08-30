@@ -1,33 +1,36 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block tituloo %}
     QuizApp | Registro
 {% endblock %}
 
+{% block cabecera %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/play.css' %}">
+{% endblock %}
+
 {% block contenido %}
-    <div class="container p-5">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card">
-                    <h2 class="card-title text-center p-3">Regístrate</h2>
-                    <div class="card-body py-md-4">
-                        <form method="POST">
-                            <div class="form-group">
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <button type="submit" class="btn btn-primary">
-                                            Registrarse
-                                        </button>
-                                    </div>
+    <div class="all" style="min-height: 160vh;">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2 class="card-title text-center p-3">Regístrate</h2>
+                <div class="card-body py-md-4">
+                    <form method="POST">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-primary">
+                                        Registrarse
+                                    </button>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
