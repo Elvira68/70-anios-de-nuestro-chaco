@@ -1,0 +1,28 @@
+.min-result {
+    min-height: 850px;
+}
+
+@media screen and (max-width: 380px) {
+
+    .min-reg {
+        margin-top: 32px;
+    }
+
+    .min-result {
+        min-height: 900px;
+    }
+
+    .min-play {
+        min-height: 900px;
+    }
+
+}
+
+
+
+@media screen and (max-width: 530px) {
+    .min-result {
+        min-height: 950px;
+    }
+
+}

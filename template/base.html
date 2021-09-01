@@ -13,9 +13,16 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik" rel="stylesheet">
+    <!-- Bootstrap Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- Archivos en Static -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="icon"href="{% static 'img/favicon.ico' %}">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     {% block cabecera %}
 	  {% endblock %}
@@ -40,14 +47,16 @@
                 {% endif %}
           </ul>
           {% if request.user.is_authenticated %}
-            <h6 class="px-4">
-                <span class="px-2">Bienvenido {{ user }}</span>
-                <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" 
-                    width="40px" 
-                    style="border: solid rgba(97, 97, 97, 0.986) 3px; border-radius: 100px;"
-                >
-            </h6>
+            <span class="min_nav">
+              <h6 class="px-4">
+                  <span class="px-2">Bienvenido {{ user }}</span>
+                  <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" 
+                      width="40px" 
+                      style="border: solid rgba(97, 97, 97, 0.986) 3px; border-radius: 100px;"
+                  >
+              </h6>
+            </span>
             <a href="{% url 'logout' %}" ><i class="fas fa-sign-out-alt logout-icon" ></i></a>
           {% else %}
             <a href="{% url 'login' %}" class="btn btn-primary my-2 my-sm-0">Iniciar Sesión</a>
@@ -58,7 +67,7 @@
 	{% endblock %}
 
 </body>
-<!-- Site footer -->
+<!-- Footer -->
 <footer class="site-footer">
     <div class="container">
     <div class="row">
