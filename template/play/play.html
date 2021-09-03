@@ -14,7 +14,7 @@
 {% block contenido %}
     <div class="all min-play">
         {% if pregunta is None %}
-            <div class="quiz-container" id="quiz">
+            <div class="quiz-container" style="margin-top: 60px;" id="quiz">
                 <div class="quiz-header">
                     <h2 class="h2Play">Juego terminado</h2>
                     <div class="ulPlay">
@@ -35,13 +35,13 @@
                                 <ul class="social-icons">
                                     <div class="row">
                                     <li>
-                                        {% post_to_facebook object_or_url " " "fab fa-facebook-f" %}
+                                        {% post_to_facebook "https://QuizApp.com" " " "fab fa-facebook-f" %}
                                     </li>
                                     <li>
-                                        {% post_to_twitter "algun texto" object_or_url " " "fab fa-twitter" %}
+                                        {% post_to_twitter "algun texto" "https://QuizApp.com" " " "fab fa-twitter" %}
                                     </li>
                                     <li>
-                                        {% post_to_whatsapp object_or_url " " "fab fa-whatsapp" %}
+                                        {% post_to_whatsapp "https://QuizApp.com" " " "fab fa-whatsapp" %}
                                     </li>
                                 </div>
                                 </ul>
