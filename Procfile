@@ -1,0 +1,1 @@
+web: waitress-serve --port=443 QuizApp.wsgi:application
