@@ -13,6 +13,7 @@
 
 
 <div class="all">
+<!-- <div class="all" style="min-height: 130vh;"> -->
     <div class="quiz-container" id="quiz">
         <div class="quiz-header">
         <h2 id="question" class="h2Play text-play" style="margin-bottom: 24px;">QuizApp Ranking</h2>
@@ -37,34 +38,5 @@
         </div>
     </div>
 </div>
-
-
-    <!-- <div class="container" style="min-height: 85vh;">
-        <h1 class="text-center my-4"> 
-            <span class="badge badge-info">
-
-                Los {{contar_user}} mejores jugadores
-                
-            </span>
-        </h1>
-        <table class="table table-striped table-bodered">
-            <thead>
-                <tr>
-                    <th>Posicion</th>
-                    <th>Usuario</th>
-                    <th>Puntaje</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user_quiz in usuario_quiz %}
-                    <tr>
-                        <th>{{forloop.counter}}</th>
-                        <th>{{user_quiz.usuario.username}}</th>
-                        <th>{{user_quiz.puntaje_total}}</th>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div> -->
 
 {% endblock %}

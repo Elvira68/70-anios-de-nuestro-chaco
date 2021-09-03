@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'QuizApp.urls'
@@ -90,8 +91,12 @@ WSGI_APPLICATION = 'QuizApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'quizappdb', 
+        'USER': config("DB_QUIZ_USER"), 
+        'PASSWORD': config("DB_QUIZ_PASS"),
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
     }
 }
 
