@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 from decouple import config
 import sys
 
@@ -89,16 +90,7 @@ WSGI_APPLICATION = 'QuizApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'quizappdb', 
-        'USER': config("DB_QUIZ_USER"), 
-        'PASSWORD': config("DB_QUIZ_PASS"),
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
-    }
-}
+DATABASES['default'] = dj_database_url.config(default=config("DB_URL"))
 
 
 # Password validation
