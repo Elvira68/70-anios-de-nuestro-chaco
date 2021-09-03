@@ -1,6 +1,6 @@
 # 70-anios-de-nuestro-chaco
 
-Aplicación quiz hecha en Django para conmemorar los 70 años de la provincia del Chaco, siguiendo el patrón MVT y haciendo uso de base de datos SQLite.
+Aplicación Quiz hecha en Django para conmemorar los 70 años de la provincia del Chaco, siguiendo el patrón MVT y haciendo uso de base de datos PostgreSQL.
 
 ### Resumen
 
