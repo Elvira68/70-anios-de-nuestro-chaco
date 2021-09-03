@@ -1,1 +1,1 @@
-web: waitress-serve QuizApp.wsgi:application
+web: gunicorn QuizApp.wsgi
