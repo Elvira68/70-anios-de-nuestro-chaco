@@ -90,6 +90,18 @@ WSGI_APPLICATION = 'QuizApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# BASE DE DATOS LOCAL PARA CORRER LOS TESTS LOCA
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'quizappdb', 
+#         'USER': config("DB_QUIZ_USER"), 
+#         'PASSWORD': config("DB_QUIZ_PASS"),
+#         'HOST': '127.0.0.1', 
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': dj_database_url.config(default=config("DATABASE_URL"))
 }
